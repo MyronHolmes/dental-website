@@ -1,5 +1,22 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
+	import { locations } from './data/locations.js';
+
+	let isOpen: boolean = false;
+	function toggleLocations() {
+		isOpen = !isOpen;
+	}
+
+	function slugify(text: string) {
+		return text.toLowerCase().replace(/\s+/g, '-'); // replaces spaces with dashes
+	}
+
+	function selectLocation(city: string) {
+		isOpen = false;
+		const slug = slugify(city);
+		goto(`/location/${slug}`);
+	}
 </script>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
@@ -20,53 +37,48 @@
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav ms-auto">
 				<li class="nav-item">
-					<a
-						class="nav-link {(page.url.pathname === '/') ? 'active' : ''}"
-						href="/"
-					>
-						Home
-					</a>
+					<a class="nav-link {page.url.pathname === '/' ? 'active' : ''}" href="/"> Home </a>
 				</li>
 				<li class="nav-item">
-					<a
-						class="nav-link {(page.url.pathname === '/about') ? 'active' : ''}"
-						href="/about"
-					>
+					<a class="nav-link {page.url.pathname === '/about' ? 'active' : ''}" href="/about">
 						About
 					</a>
 				</li>
 				<li class="nav-item">
-					<a
-						class="nav-link {(page.url.pathname === '/services') ? 'active' : ''}"
-						href="/services"
-					>
+					<a class="nav-link {page.url.pathname === '/services' ? 'active' : ''}" href="/services">
 						Services
 					</a>
 				</li>
 				<li class="nav-item">
-					<a
-						class="nav-link {(page.url.pathname === '/contact') ? 'active' : ''}"
-						href="/contact"
-					>
+					<a class="nav-link {page.url.pathname === '/contact' ? 'active' : ''}" href="/contact">
 						Contact
 					</a>
 				</li>
 
 				<li class="nav-item dropdown">
 					<a
-						class="nav-link dropdown-toggle {((page.url.pathname).startsWith('/locations')) ? 'active' : ''}"
+						class="nav-link dropdown-toggle {page.url.pathname.startsWith('/locations')
+							? 'active'
+							: ''}"
 						href="#"
 						id="locationsDropdown"
 						role="button"
-						data-bs-toggle="dropdown"
-						aria-expanded="false"
+						on:click|preventDefault={toggleLocations}
 					>
 						Locations
 					</a>
-					<ul class="dropdown-menu" aria-labelledby="locationsDropdown">
-						<li><a class="dropdown-item" href="/locations/new-york">New York</a></li>
-						<li><a class="dropdown-item" href="/locations/los-angeles">Los Angeles</a></li>
-						<li><a class="dropdown-item" href="/locations/chicago">Chicago</a></li>
+					<ul class="dropdown-menu {isOpen ? 'show' : ''}" aria-labelledby="locationsDropdown">
+						{#each locations as loc}
+							<li>
+								<button
+									type="button"
+									class="dropdown-item"
+									on:click={() => selectLocation(loc.name)}
+								>
+									{loc.name}
+								</button>
+							</li>
+						{/each}
 					</ul>
 				</li>
 

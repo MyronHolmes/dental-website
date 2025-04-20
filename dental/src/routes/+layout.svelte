@@ -11,6 +11,6 @@
 
 	<footer class="bg-secondary text-center text-white py-3">
 		<i class="fa fa-copyright"></i>
-		<strong> Copyright - Dental Bliss </strong>
+		<strong> Copyright - Dental Bliss 2025</strong>
 	</footer>
 </div>
