@@ -104,7 +104,7 @@
 		color: #0d6efd;
 		font-weight: 600;
 	}
-	.nav-link:focus:not(:focus-visible) {
+	.nav-link:focus {
 		outline: none;
 		box-shadow: none;
 	}
