@@ -1,22 +1,6 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import { locations } from './data/locations.js';
-
-	let isOpen: boolean = false;
-	function toggleLocations() {
-		isOpen = !isOpen;
-	}
-
-	function slugify(text: string) {
-		return text.toLowerCase().replace(/\s+/g, '-'); // replaces spaces with dashes
-	}
-
-	function selectLocation(city: string) {
-		isOpen = false;
-		const slug = slugify(city);
-		goto(`/location/${slug}`);
-	}
 </script>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
@@ -37,46 +21,41 @@
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav ms-auto">
 				<li class="nav-item">
-					<a class="nav-link {page.url.pathname === '/' ? 'active' : ''}" href="/"> Home </a>
+					<a class="nav-link {page.url.pathname === '/' ? 'active' : ''}" href="/">Home</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link {page.url.pathname === '/about' ? 'active' : ''}" href="/about">
-						About
-					</a>
+					<a class="nav-link {page.url.pathname === '/about' ? 'active' : ''}" href="/about"
+						>About</a
+					>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link {page.url.pathname === '/services' ? 'active' : ''}" href="/services">
-						Services
-					</a>
+					<a class="nav-link {page.url.pathname === '/services' ? 'active' : ''}" href="/services"
+						>Services</a
+					>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link {page.url.pathname === '/contact' ? 'active' : ''}" href="/contact">
-						Contact
-					</a>
+					<a class="nav-link {page.url.pathname === '/contact' ? 'active' : ''}" href="/contact"
+						>Contact</a
+					>
 				</li>
 
 				<li class="nav-item dropdown">
 					<a
-						class="nav-link dropdown-toggle {page.url.pathname.startsWith('/locations')
+						class="nav-link dropdown-toggle {page.url.pathname.startsWith('/location')
 							? 'active'
 							: ''}"
-						href="#"
 						id="locationsDropdown"
+						href="#"
 						role="button"
-						on:click|preventDefault={toggleLocations}
+						data-bs-toggle="dropdown"
+						aria-expanded="false"
 					>
 						Locations
 					</a>
-					<ul class="dropdown-menu {isOpen ? 'show' : ''}" aria-labelledby="locationsDropdown">
+					<ul class="dropdown-menu" aria-labelledby="locationsDropdown">
 						{#each locations as loc}
 							<li>
-								<button
-									type="button"
-									class="dropdown-item"
-									on:click={() => selectLocation(loc.name)}
-								>
-									{loc.name}
-								</button>
+								<a class="dropdown-item" href={loc.path}>{loc.name}</a>
 							</li>
 						{/each}
 					</ul>
@@ -118,16 +97,17 @@
 		color: #555;
 		transition: color 0.3s ease;
 	}
-
 	.nav-link:hover {
 		color: #0d6efd;
 	}
-
 	.nav-link.active {
 		color: #0d6efd;
 		font-weight: 600;
 	}
-
+	.nav-link:focus {
+		outline: none;
+		box-shadow: none;
+	}
 	.social-icon i {
 		display: inline-block;
 		min-width: 1.6rem;
@@ -138,7 +118,6 @@
 			color 0.3s ease,
 			transform 0.3s ease;
 	}
-
 	.social-icon:hover i {
 		color: #0d6efd;
 		transform: scale(1.3);
