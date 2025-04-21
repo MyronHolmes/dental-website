@@ -1,5 +1,4 @@
 <script lang="ts">
-	// Add any specific logic if needed later
 </script>
 
 <section class="py-5 bg-light">
@@ -7,23 +6,18 @@
 		<h1 class="mb-4 text-primary fw-bold text-center">About Dental Bliss</h1>
 		<div class="row align-items-center">
 			<div class="col-md-6">
-				<img
-					src="/images/clinic.jpg"
-					alt="Dental Bliss Clinic"
-					class="img-fluid rounded shadow"
-				/>
+				<img src="/dental-service.jpg" alt="Dental Bliss Clinic" class="img-fluid rounded shadow" />
 			</div>
 			<div class="col-md-6">
 				<h3 class="fw-semibold mb-3">Your Smile, Our Passion</h3>
 				<p>
-					At Dental Bliss, we believe everyone deserves a healthy, confident smile.
-					Our experienced team of dental professionals is dedicated to providing
-					comfortable, state-of-the-art care in a relaxing environment.
+					At Dental Bliss, we believe everyone deserves a healthy, confident smile. Our experienced
+					team of dental professionals is dedicated to providing comfortable, state-of-the-art care
+					in a relaxing environment.
 				</p>
 				<p>
-					Whether it’s routine cleaning, cosmetic dentistry, or more advanced
-					treatments, we're committed to excellence and compassion with every
-					visit.
+					Whether it's routine cleaning, cosmetic dentistry, or more advanced treatments, we're
+					committed to excellence and compassion with every visit.
 				</p>
 				<a href="/services" class="btn btn-primary mt-3">Explore Our Services</a>
 			</div>
@@ -38,7 +32,7 @@
 			<div class="col-md-4 mb-4">
 				<i class="fa fa-smile-o fa-3x mb-3 text-primary"></i>
 				<h5>Personalized Care</h5>
-				<p>Tailored treatment plans for every patient’s unique needs.</p>
+				<p>Tailored treatment plans for every patient's unique needs.</p>
 			</div>
 			<div class="col-md-4 mb-4">
 				<i class="fa fa-star fa-3x mb-3 text-primary"></i>

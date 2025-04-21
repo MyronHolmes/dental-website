@@ -1,8 +1,21 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { locations } from './data/locations.js';
+
+	function formattedTitle(pathname: string): string {
+		const slug = pathname.split('/').filter(Boolean).pop() || '';
+		return slug
+			.split('-')
+			.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+			.join(' ');
+	}
 </script>
 
+<svelte:head>
+	<title
+		>{page.url.pathname === '/' ? 'Home' : formattedTitle(page.url.pathname)} | Dental Bliss</title
+	>
+</svelte:head>
 <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
 	<div class="container">
 		<a class="navbar-brand fw-bold text-primary" href="/">Dental Bliss</a>
@@ -45,7 +58,7 @@
 							? 'active'
 							: ''}"
 						id="locationsDropdown"
-						href="#"
+						href="/"
 						role="button"
 						data-bs-toggle="dropdown"
 						aria-expanded="false"
