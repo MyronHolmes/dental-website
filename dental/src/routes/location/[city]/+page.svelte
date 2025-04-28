@@ -1,5 +1,9 @@
 <script lang="ts">
+	import MultiselectInput from '$lib/components/MultiselectInput.svelte';
+	import { serviceCategories } from '$lib/components/data/services.js';
 	import type { PageData } from './$types.js';
+	import { page } from '$app/state';
+	import Toast from '$lib/components/Toast.svelte';
 	export let data: PageData;
 
 	function capitalizeWords(str: string) {
@@ -8,9 +12,16 @@
 			.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
 			.join(' ');
 	}
-	console.log(data);
+	console.log(page.form)
 </script>
 
+{#if page.form}
+	{#if page.form.success === true}
+		<Toast type="polite" time={"10000"} message={page.form.message}></Toast>
+	{:else if page.form.success === false}
+		<Toast type="assertive" time={"10000"} message={page.form.message}></Toast>
+	{/if}
+{/if}
 <section class="py-5">
 	<div class="container">
 		<h1 class="text-center text-primary fw-bold mb-4">{data.location.name} Office</h1>
@@ -46,7 +57,7 @@
 				<div class="card shadow-sm h-100 border-0">
 					<div class="card-body">
 						<h4 class="fw-semibold mb-4">Request an Appointment</h4>
-						<form method="POST">
+						<form method="POST" action="?/request">
 							<input type="hidden" name="city" value={data.location.name} />
 							<div class="mb-3">
 								<label class="form-label" for="firstName">First Name</label>
@@ -67,6 +78,10 @@
 							<div class="mb-3">
 								<label class="form-label" for="dob">Date of Birth</label>
 								<input class="form-control" type="date" name="dob" required />
+							</div>
+							<div class="mb-3">
+								<label for="service">Select A Service</label>
+								<MultiselectInput serviceCategories={serviceCategories}></MultiselectInput>
 							</div>
 							<button type="submit" class="btn btn-primary w-100">Submit</button>
 						</form>
