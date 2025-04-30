@@ -1,5 +1,9 @@
 import { nanoid } from 'nanoid'; // very lightweight random ID generator
 
+export interface ServiceObj {
+  [key: string]: string
+}
+
 export interface Service {
     id: string;
     name: string;

@@ -19,16 +19,17 @@ export const actions = {
 	request: async ({ request }) => {
 		const data = await request.formData()
 
-		let selected = data.getAll("service") as string[]
-		const parsedServices = selected.map(item => {
-			try {
-				return JSON.parse(item as string);
-			} catch (e) {
-				console.error("Failed to parse service item", item);
-				return null;
-			}
-		}).filter(Boolean); 
+		console.log(data)
 
+		let raw = data.get("service");
+		let parsedServices: object[] = [];
+		
+		try {
+			if (raw) parsedServices = JSON.parse(raw as string);
+		} catch (e) {
+			console.error("Invalid JSON in service field", raw);
+		}
+		
 		const formData = {
 			city: data.get("city"),
 			firstName: data.get("firstName"),
@@ -38,7 +39,7 @@ export const actions = {
 			dob: data.get("dob"),
 			service: parsedServices
 		};
-
+		console.log(formData)
 		return { success: true, formData, message: "Your request has been submitted!"}
 		
 	}

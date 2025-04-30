@@ -1,10 +1,12 @@
 <script lang="ts">
 	import MultiselectInput from '$lib/components/MultiselectInput.svelte';
-	import { serviceCategories } from '$lib/components/data/services.js';
+	import { serviceCategories, type ServiceObj } from '$lib/components/data/services.js';
 	import type { PageData } from './$types.js';
 	import { page } from '$app/state';
 	import Toast from '$lib/components/Toast.svelte';
 	export let data: PageData;
+
+	let serviceArray: ServiceObj[] = [];
 
 	function capitalizeWords(str: string) {
 		return str
@@ -13,6 +15,7 @@
 			.join(' ');
 	}
 	console.log(page.form)
+	$: console.log(serviceArray)
 </script>
 
 {#if page.form}
@@ -80,9 +83,10 @@
 								<input class="form-control" type="date" name="dob" required />
 							</div>
 							<div class="mb-3">
-								<label for="service">Select A Service</label>
-								<MultiselectInput serviceCategories={serviceCategories}></MultiselectInput>
+								<label class="form-label" for="service">Select A Service</label>
+								<MultiselectInput serviceCategories={serviceCategories} bind:list={serviceArray}></MultiselectInput>
 							</div>
+							<input type="hidden" name="service" value={JSON.stringify(serviceArray)}>
 							<button type="submit" class="btn btn-primary w-100">Submit</button>
 						</form>
 					</div>
