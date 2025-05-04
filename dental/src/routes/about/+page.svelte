@@ -1,8 +1,14 @@
 <script lang="ts">
+	import AOS from 'aos';
+	import { onMount } from 'svelte';
+
+	onMount(() => {
+		AOS.init({ once: true });
+	});
 </script>
 
 <section class="py-5 bg-light">
-	<div class="container">
+	<div class="container" data-aos="fade-up">
 		<h1 class="mb-4 text-primary fw-bold text-center">About Dental Bliss</h1>
 		<div class="row align-items-center">
 			<div class="col-md-6">
@@ -26,7 +32,7 @@
 </section>
 
 <section class="py-5">
-	<div class="container">
+	<div class="container" data-aos="fade-up">
 		<h2 class="text-center text-primary fw-bold mb-5">Why Choose Us</h2>
 		<div class="row text-center">
 			<div class="col-md-4 mb-4">
