@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { locations } from '$lib/components/data/locations.js'; 
+	import { locations } from '$lib/components/data/locations.js';
 	import { goto } from '$app/navigation';
 
 	function navigateTo(path: string) {
@@ -36,12 +36,13 @@
 	</div>
 </section>
 
-
 <style>
 	.accessible-card {
 		background-color: white;
 		cursor: pointer;
-		transition: transform 0.2s ease, box-shadow 0.2s ease;
+		transition:
+			transform 0.2s ease,
+			box-shadow 0.2s ease;
 		border-radius: 0.25rem;
 	}
 

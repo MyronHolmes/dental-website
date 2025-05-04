@@ -2,9 +2,7 @@
 	import { onMount } from 'svelte';
 	import AOS from 'aos';
 	import 'aos/dist/aos.css';
-
 	import { serviceCategories } from '$lib/components/data/services.js';
-	import { once } from 'svelte/legacy';
 
 	onMount(() => {
 		AOS.init({ once: true });

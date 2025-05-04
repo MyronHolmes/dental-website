@@ -14,11 +14,11 @@
 		const target = e.target as HTMLElement;
 		let isChecked = false;
 
-		if (target.tagName === "DIV"){
+		if (target.tagName === 'DIV') {
 			const checkbox = target.children.item(0) as HTMLInputElement;
 			isChecked = checkbox.checked;
 			checkbox.checked = !isChecked;
-			trackOptions(service, !isChecked)
+			trackOptions(service, !isChecked);
 		}
 	}
 
@@ -32,11 +32,10 @@
 			const newObj = makeObj(key, value);
 			list = [...list, newObj];
 		}
-		console.log(list)
+		console.log(list);
 	}
 </script>
 
-<!-- Service List Dropdown -->
 {#if serviceCategories.length > 0}
 	<div class="border border-light-subtle rounded w-auto" style="height: 70px; overflow-y: auto;">
 		{#each serviceCategories as category}
@@ -59,7 +58,7 @@
 						checked={list.some((obj) => service.id in obj)}
 						value={JSON.stringify(makeObj(service.id, service.name))}
 						id={service.id}
-						on:click={(e) => trackOptions(service,(e.target as HTMLInputElement).checked)}
+						on:click={(e) => trackOptions(service, (e.target as HTMLInputElement).checked)}
 					/>
 					<label class="ps-1" for={service.id}>{service.name}</label>
 				</div>
