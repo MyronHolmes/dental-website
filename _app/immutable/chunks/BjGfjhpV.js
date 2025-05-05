@@ -1,1 +1,0 @@
-import{s as e,p as r}from"./ZC12D37N.js";const t={get error(){return r.error},get form(){return r.form},get status(){return r.status},get url(){return r.url}};e.updated.check;const o=t;export{o as p};
