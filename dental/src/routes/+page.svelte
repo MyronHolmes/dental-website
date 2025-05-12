@@ -1,9 +1,10 @@
 <script lang="ts">
-	import { locations } from '../lib/components/data/locations.js';
+	import { base } from '$app/paths';
 	import AOS from 'aos';
 	import 'aos/dist/aos.css';
 	import { onMount } from 'svelte';
 
+	export let data;
 	onMount(() => {
 		AOS.init({ once: true });
 	});
@@ -13,13 +14,17 @@
 	<div class="container py-5">
 		<h1 class="display-4 fw-bold text-primary">Welcome to Dental Bliss</h1>
 		<p class="lead">Bright smiles. Brighter futures.</p>
-		<a href="/contact" class="btn btn-outline-primary mt-3">Contact Us</a>
+		<a href="{base}/contact" class="btn btn-outline-primary mt-3">Contact Us</a>
 	</div>
 </div>
 <section class="container my-5 px-3">
 	<div class="row align-items-center">
 		<div class="col-md-6 mb-4 mb-md-0" data-aos="fade-right">
-			<img src="/team.jpg" alt="Smiling family at the dentist" class="img-fluid rounded shadow" />
+			<img
+				src="{base}/team.jpg"
+				alt="Smiling family at the dentist"
+				class="img-fluid rounded shadow"
+			/>
 		</div>
 		<div class="col-md-6" data-aos="fade-left">
 			<h2 class="text-primary mb-3">Dental Care for All Ages</h2>
@@ -34,7 +39,7 @@
 				for a routine check-up or a complete smile makeover, you're in good hands.
 			</p>
 			<div class="d-flex justify-content-center">
-				<a href="/services" class="btn btn-outline-primary mt-2">Explore Our Services</a>
+				<a href="{base}/services" class="btn btn-outline-primary mt-2">Explore Our Services</a>
 			</div>
 		</div>
 	</div>
@@ -73,7 +78,7 @@
 				</div>
 			</div>
 		</div>
-		<a href="/services" class="btn btn-outline-primary mt-4">View All Services</a>
+		<a href="{base}/services" class="btn btn-outline-primary mt-4">View All Services</a>
 	</div>
 </section>
 <section class="bg-white py-2">
@@ -133,11 +138,13 @@
 			We're proud to serve several communities across the region — find a Dental Bliss near you.
 		</p>
 		<div class="row justify-content-center g-4">
-			{#each locations as loc}
+			{#each data.locations as location}
 				<div class="col-md-4" data-aos="fade-up">
 					<div class="p-4 border rounded shadow-sm h-100">
-						<h5>{loc.name}</h5>
-						<a class="btn btn-outline-primary btn-sm mt-2" href={loc.path}>View Location</a>
+						<h5>{location.name}</h5>
+						<a class="btn btn-outline-primary btn-sm mt-2" href={`${base}${location.path}`}
+							>View location</a
+						>
 					</div>
 				</div>
 			{/each}

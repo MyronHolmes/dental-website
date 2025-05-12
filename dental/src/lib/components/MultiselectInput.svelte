@@ -1,16 +1,16 @@
 <script lang="ts">
-	import type { ServiceCategory, Service, ServiceObj } from './data/services.js';
+	import type { Service } from "$lib/types.js";
 
-	export let serviceCategories: ServiceCategory[];
-	export let list: ServiceObj[];
+	export let services: Service[];
+	export let list: Record<string, string>[];
 
-	function makeObj(key: string, value: string): ServiceObj {
-		let obj: ServiceObj = {};
+	function makeObj(key: string, value: string) {
+		let obj: Record<string, string> = {};
 		obj[key] = value;
 		return obj;
 	}
 
-	function handelServiceClick(service: Service, e: Event) {
+	function handelServiceClick(service: Service , e: Event) {
 		const target = e.target as HTMLElement;
 		let isChecked = false;
 
@@ -32,14 +32,13 @@
 			const newObj = makeObj(key, value);
 			list = [...list, newObj];
 		}
-		console.log(list);
+		(list);
 	}
 </script>
 
-{#if serviceCategories.length > 0}
+{#if services.length > 0}
 	<div class="border border-light-subtle rounded w-auto" style="height: 70px; overflow-y: auto;">
-		{#each serviceCategories as category}
-			{#each category.services as service: Service (service.id)}
+		{#each services as service}
 				<div
 					class="form-check text-dark"
 					role="button"
@@ -63,9 +62,8 @@
 					<label class="ps-1" for={service.id}>{service.name}</label>
 				</div>
 			{/each}
-		{/each}
 	</div>
-{:else if serviceCategories.length < 1}
+{:else if services.length < 1}
 	<span class="text-danger">No Results Found</span>
 {/if}
 

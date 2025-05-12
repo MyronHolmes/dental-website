@@ -1,6 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { locations } from './data/locations.js';
+	import { base } from '$app/paths';
+	import type { Location } from '$lib/types.js';
+
+	export let locations: Location[];
 
 	function formattedTitle(pathname: string): string {
 		const slug = pathname.split('/').filter(Boolean).pop() || '';
@@ -9,16 +12,17 @@
 			.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
 			.join(' ');
 	}
+	console.log(page.url.pathname)
 </script>
 
 <svelte:head>
 	<title
-		>{page.url.pathname === '/' ? 'Home' : formattedTitle(page.url.pathname)} | Dental Bliss</title
+		>{page.url.pathname === base ? 'Home' : formattedTitle(page.url.pathname)} | Dental Bliss</title
 	>
 </svelte:head>
 <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
 	<div class="container">
-		<a class="navbar-brand fw-bold text-primary" href="/">Dental Bliss</a>
+		<a class="navbar-brand fw-bold text-primary" href="{base}">Dental Bliss</a>
 		<button
 			class="navbar-toggler"
 			type="button"
@@ -34,27 +38,27 @@
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav ms-auto">
 				<li class="nav-item">
-					<a class="nav-link {page.url.pathname === '/' ? 'active' : ''}" href="/">Home</a>
+					<a class="nav-link {page.url.pathname === base + '/' ? 'active' : ''}" href={base}>Home</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link {page.url.pathname === '/about' ? 'active' : ''}" href="/about"
+					<a class="nav-link {page.url.pathname === base + '/about' ? 'active' : ''}" href="{base}/about"
 						>About</a
 					>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link {page.url.pathname === '/services' ? 'active' : ''}" href="/services"
+					<a class="nav-link {page.url.pathname === base + '/services' ? 'active' : ''}" href="{base}/services"
 						>Services</a
 					>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link {page.url.pathname === '/contact' ? 'active' : ''}" href="/contact"
+					<a class="nav-link {page.url.pathname === base + '/contact' ? 'active' : ''}" href="{base}/contact"
 						>Contact</a
 					>
 				</li>
 
 				<li class="nav-item dropdown">
 					<a
-						class="nav-link dropdown-toggle {page.url.pathname.startsWith('/location')
+						class="nav-link dropdown-toggle {page.url.pathname.startsWith(`${base}/location`)
 							? 'active'
 							: ''}"
 						id="locationsDropdown"
@@ -68,7 +72,7 @@
 					<ul class="dropdown-menu" aria-labelledby="locationsDropdown">
 						{#each locations as loc}
 							<li>
-								<a class="dropdown-item" href={loc.path}>{loc.name}</a>
+								<a class="dropdown-item" href={`${base}${loc.path}`}>{loc.name}</a>
 							</li>
 						{/each}
 					</ul>

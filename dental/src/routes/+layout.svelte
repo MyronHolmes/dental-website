@@ -1,9 +1,11 @@
 <script lang="ts">
 	import NavBar from '$lib/components/NavBar.svelte';
+
+	export let data;
 </script>
 
 <div class="d-flex flex-column min-vh-100">
-	<NavBar />
+	<NavBar locations={data.locations} />
 	<main class="flex-fill">
 		<slot />
 	</main>

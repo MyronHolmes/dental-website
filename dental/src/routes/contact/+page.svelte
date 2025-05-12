@@ -1,7 +1,8 @@
 <script lang="ts">
-	import { locations } from '$lib/components/data/locations.js';
 	import { goto } from '$app/navigation';
+	import { base } from '$app/paths';
 
+	export let data;
 	function navigateTo(path: string) {
 		goto(path);
 	}
@@ -11,12 +12,12 @@
 	<div class="container">
 		<h1 class="text-center text-primary fw-bold mb-5">Contact Us</h1>
 		<div class="row g-4">
-			{#each locations as location}
+			{#each data.locations as location}
 				<div class="col-md-4">
 					<button
 						type="button"
 						class="card h-100 shadow-sm border-0 w-100 p-0 bg-white accessible-card d-flex align-items-center justify-content-center"
-						on:click={() => navigateTo(location.path)}
+						on:click={() => navigateTo(base + location.path)}
 						on:keydown={(e) => e.key === 'Enter' && navigateTo(location.path)}
 					>
 						<div class="card-body text-center">
@@ -25,9 +26,9 @@
 							<p><i class="fa fa-envelope text-primary me-2"></i> {location.email}</p>
 							<hr />
 							<h6 class="text-muted fw-semibold">Hours of Operation</h6>
-							<p class="mb-1">{location.hours.weekdays}</p>
-							<p class="mb-1">{location.hours.saturday}</p>
-							<p class="mb-0">{location.hours.sunday}</p>
+							<p class="mb-1">{location.weekday_hours}</p>
+							<p class="mb-1">{location.saturday_hours}</p>
+							<p class="mb-0">{location.sunday_hours}</p>
 						</div>
 					</button>
 				</div>

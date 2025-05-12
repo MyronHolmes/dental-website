@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import AOS from 'aos';
 	import { onMount } from 'svelte';
 
@@ -12,7 +13,11 @@
 		<h1 class="mb-4 text-primary fw-bold text-center">About Dental Bliss</h1>
 		<div class="row align-items-center">
 			<div class="col-md-6">
-				<img src="/dental-service.jpg" alt="Dental Bliss Clinic" class="img-fluid rounded shadow" />
+				<img
+					src="{base}/dental-service.jpg"
+					alt="Dental Bliss Clinic"
+					class="img-fluid rounded shadow"
+				/>
 			</div>
 			<div class="col-md-6">
 				<h3 class="fw-semibold mb-3">Your Smile, Our Passion</h3>
@@ -25,7 +30,7 @@
 					Whether it's routine cleaning, cosmetic dentistry, or more advanced treatments, we're
 					committed to excellence and compassion with every visit.
 				</p>
-				<a href="/services" class="btn btn-primary mt-3">Explore Our Services</a>
+				<a href="{base}/services" class="btn btn-primary mt-3">Explore Our Services</a>
 			</div>
 		</div>
 	</div>
